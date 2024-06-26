@@ -1,0 +1,11 @@
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 130
+
+Rails:
+  Enabled: true
