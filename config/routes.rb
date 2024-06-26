@@ -7,4 +7,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root to: redirect('question')
+
+  get 'question', to: 'question#index'
+
+  get 'question_state', to: 'question_state#index'
+  get 'question_state/first_topic'
+  get 'question_state/next_topic'
+  get 'question_state/next_topic_question'
+  get 'question_state/next_question'
 end
