@@ -54,6 +54,7 @@ RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails log tmp
 USER rails:rails
 
+ENV SECRET_KEY_BASE_DUMMY 1
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
