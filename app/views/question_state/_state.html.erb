@@ -1,4 +1,28 @@
-<b>Topic</b>: <%= @question_state.topic %><br />
-<b>Question</b>: <%= @question_state.question %><br />
-<br />
+<h1>Question state</h1>
+
+<h2>Topic and Question Numbers</h2>
+<table style="border: 1px solid black">
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>Topic</th>
+    <th>Question</th>
+  </tr>
+  </thead>
+  <tbody></tbody>
+  <tr>
+    <th>Current</th>
+    <td><%= @question_state.topic %></td>
+    <td><%= @question_state.question %></td>
+  </tr>
+
+  <tr>
+    <th>Next</th>
+    <td><%= @next_topic %></td>
+    <td><%= @next_question %></td>
+  </tr>
+</table>
+
+<hr>
+<h2>Actions</h2>
 <%= render partial: 'next_buttons' %>

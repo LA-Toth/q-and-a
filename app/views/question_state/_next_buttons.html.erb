@@ -1,4 +1,4 @@
-<table style="border: 0; width: 100%">
+<table style="border: 1px solid black; width: 100%; padding: 2px">
 
   <tr>
     <td>
@@ -6,38 +6,41 @@
         <button>Next question</button>
       </form>
     </td>
+
     <td>
-      <form action="<%= question_state_next_topic_path %>">
-        <button>Next topic</button>
-      </form>
-    </td>
-  </tr>
+      <table style="border: 2px solid red; width: 200px">
+        <tr>
+          <td>
+            <form action="<%= question_state_next_topic_path %>">
+              <button>Next topic</button>
+            </form>
+          </td>
+        </tr>
 
-  <tr>
-    <td>&nbsp;</td>
-    <td>
-      <form action="<%= question_state_next_topic_question_path %>">
-        <button>Next question in current topic</button>
-      </form>
-    </td>
-  </tr>
+        <tr>
+          <td>
+            <form action="<%= question_state_next_topic_question_path %>">
+              <button>Next question in current topic</button>
+            </form>
+          </td>
+        </tr>
 
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
 
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
 
-  <tr>
-    <td>&nbsp;</td>
-    <td>
-      <form action="<%= question_state_first_topic_path %>">
-        <button>First topic (RESET)</button>
-      </form>
+        <tr>
+          <td>
+            <form action="<%= question_state_first_topic_path %>">
+              <button>First topic (RESET)</button>
+            </form>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
 </table>
