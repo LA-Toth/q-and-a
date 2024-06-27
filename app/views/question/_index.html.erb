@@ -1,8 +1,21 @@
-Topic: #<%= @question.topic %><br />
-Question: #<%= @question.question %><br />
+<table class="table table-striped" style="max-width: 300px">
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>Topic</th>
+    <th>Question</th>
+  </tr>
+  </thead>
+  <tbody></tbody>
+  <tr>
+    <th>Current</th>
+    <td><%= @question.topic %></td>
+    <td><%= @question.question %></td>
+  </tr>
+</table>
 
 <hr style="margin-bottom: 20px; margin-top: 5px;" />
 
-<pre>
+<pre class="the-question">
 <%= escape @question.text %>
 </pre>

@@ -10,7 +10,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="min-vh-100">
+  <div class="min-vh-100">
+  <div class="container content min-vh-100">
     <%= yield %>
+  </div></div>
   </body>
 </html>
