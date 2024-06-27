@@ -12,12 +12,18 @@ class QuestionStateController < ApplicationController
   end
 
   def next_topic
-    @question_state.next_topic
+    if Question.exist?(@question_state.topic + 1, 1)
+      @question_state.next_topic
+    else
+      @question_state.topic = Question::COMPLETED_VALUE
+      @question_state.question = Question::COMPLETED_VALUE
+    end
     redirect_to action: :index
   end
 
-  def next_topic_question
-    @question_state.next_question
+  def previous_topic
+    @question_state.topic -= 1
+    @question_state.question = Question.last_question_of(@question_state.topic)
     redirect_to action: :index
   end
 
@@ -29,6 +35,19 @@ class QuestionStateController < ApplicationController
     else
       @question_state.topic = Question::COMPLETED_VALUE
       @question_state.question = Question::COMPLETED_VALUE
+    end
+    redirect_to action: :index
+  end
+
+  def previous_question
+    if @question_state.question > 1 && Question.exist?(@question_state.topic, @question_state.question - 1)
+      @question_state.question -= 1
+    elsif @question_state.topic > 1
+      @question_state.topic -= 1
+      @question_state.question = Question.last_question_of(@question_state.topic)
+    else
+      @question_state.topic = 1
+      @question_state.question = 1
     end
     redirect_to action: :index
   end

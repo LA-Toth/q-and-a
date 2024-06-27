@@ -1,29 +1,52 @@
 <div class="row">
   <div class="col col-sm-6">
-    <form action="<%= question_state_next_question_path %>">
-      <button type="button" class="btn btn-primary">Next question</button>
-    </form>
+    <div class="row gap-3">
+      <div class="col px-3">
+        <form action="<%= question_state_next_question_path %>">
+          <button type="submit" class="btn btn-primary"
+                  <%- if @question_state.topic == 1000 %> disabled
+                  <%- end %>>Next question
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="row gap-3">
+      <div class="col px-3">
+        <form action="<%= question_state_previous_question_path %>">
+          <button type="submit" class="btn btn-primary"
+                  <%- if @question_state.topic == 1000 || (@question_state.topic == 1 && @question_state.question == 1) %> disabled
+                  <%- end %>>Previous question
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
   <div class="col col-sm-4">
     <div class="row gap-3">
       <div class="col px-3">
         <form action="<%= question_state_next_topic_path %>">
-          <button type="button" class="btn btn-secondary">Next topic</button>
+          <button type="submit" class="btn btn-secondary"
+                  <%- if @question_state.topic == 1000 %> disabled
+                  <%- end %>>Next topic
+          </button>
         </form>
       </div>
     </div>
 
     <div class="row">
       <div class="col px-3">
-        <form action="<%= question_state_next_topic_question_path %>">
-          <button type="button" class="btn btn-secondary">Next question in current topic</button>
+        <form action="<%= question_state_previous_topic_path %>">
+          <button type="submit" class="btn btn-secondary"
+                  <%- if @question_state.topic == 1000 || (@question_state.topic == 1 && @question_state.question == 1) %> disabled
+                  <%- end %>>Previous topic
+          </button>
         </form>
       </div>
     </div>
     <div class="row">
       <div class="col px-3">
         <form action="<%= question_state_first_topic_path %>">
-          <button type="button" class="btn btn-danger">First topic (RESET)</button>
+          <button type="submit" class="btn btn-danger">First topic (RESET)</button>
         </form>
       </div>
     </div>

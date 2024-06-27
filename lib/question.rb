@@ -32,6 +32,12 @@ class Question < QuestionState
     File.exist? format('%s/%02d-%02d.txt', BASE_DIR, topic, question)
   end
 
+  def self.last_question_of(topic)
+    99.downto(1).each do |q|
+      return q if exist?(topic, q)
+    end
+  end
+
   def next_topic_and_question
     if Question.exist?(topic, question + 1)
       [topic, question + 1]

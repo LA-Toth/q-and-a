@@ -15,6 +15,10 @@ class QuestionState
     @question += 1
   end
 
+  def previous_question
+    @question -= 1
+  end
+
   def first_topic
     @topic = 1
     @question = 1

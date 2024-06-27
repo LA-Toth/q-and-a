@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'question_state', to: 'question_state#index'
   get 'question_state/first_topic'
   get 'question_state/next_topic'
-  get 'question_state/next_topic_question'
   get 'question_state/next_question'
+
+  get 'question_state/previous_topic'
+  get 'question_state/previous_question'
 end

@@ -12,14 +12,31 @@
   <tbody></tbody>
   <tr>
     <th>Current</th>
-    <td><%= @question_state.topic %></td>
-    <td><%= @question_state.question %></td>
+    <% if @question.topic != 1000 %>
+      <td><%= @question_state.topic %></td>
+      <td><%= @question_state.question %></td>
+    <% else %>
+      <td colspan="2">
+        <div class="completed">Completed</div>
+      </td>
+    <% end %>
   </tr>
-
   <tr>
     <th>Next</th>
-    <td><%= @next_topic %></td>
-    <td><%= @next_question %></td>
+    <% if @question.topic != 1000 %>
+      <% if @next_topic != 1000 %>
+        <td><%= @next_topic %></td>
+        <td><%= @next_question %></td>
+      <% else %>
+        <td colspan="2">
+          <div class="completed">Completed</div>
+        </td>
+      <% end %>
+    <% else %>
+      <td colspan="2">
+        <div class="completed">Nothing</div>
+      </td>
+    <% end %>
   </tr>
 </table>
 
