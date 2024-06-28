@@ -12,7 +12,7 @@
   <tbody></tbody>
   <tr>
     <th>Current</th>
-    <% if @question.topic != 1000 %>
+    <% if @question.topic != Question::COMPLETED_VALUE %>
       <td><%= @question_state.topic %></td>
       <td><%= @question_state.question %></td>
     <% else %>
@@ -23,8 +23,8 @@
   </tr>
   <tr>
     <th>Next</th>
-    <% if @question.topic != 1000 %>
-      <% if @next_topic != 1000 %>
+    <% if @question.topic != Question::COMPLETED_VALUE %>
+      <% if @next_topic != Question::COMPLETED_VALUE %>
         <td><%= @next_topic %></td>
         <td><%= @next_question %></td>
       <% else %>
@@ -37,6 +37,11 @@
         <div class="completed">Nothing</div>
       </td>
     <% end %>
+  </tr>
+  <tr>
+    <th>On Server</th>
+    <td id="dynTopic"><%= @question.topic != Question::COMPLETED_VALUE ? @question.topic : 'Completed' %></td>
+    <td id="dynQuestion"><%= @question.question != Question::COMPLETED_VALUE ? @question.question : 'Completed' %></td>
   </tr>
 </table>
 

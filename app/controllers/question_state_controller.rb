@@ -8,7 +8,7 @@ class QuestionStateController < ApplicationController
 
   def first_topic
     @question_state.first_topic
-    redirect_to action: :index
+    update_channel_and_redirect
   end
 
   def next_topic
@@ -18,13 +18,15 @@ class QuestionStateController < ApplicationController
       @question_state.topic = Question::COMPLETED_VALUE
       @question_state.question = Question::COMPLETED_VALUE
     end
-    redirect_to action: :index
+    update_channel_and_redirect
   end
 
   def previous_topic
-    @question_state.topic -= 1
-    @question_state.question = Question.last_question_of(@question_state.topic)
-    redirect_to action: :index
+    if @question_state.topic > 1
+      @question_state.topic = Question.previous_topic_of(@question_state.topic)
+      @question_state.question = Question.last_question_of(@question_state.topic)
+    end
+    update_channel_and_redirect
   end
 
   def next_question
@@ -36,11 +38,14 @@ class QuestionStateController < ApplicationController
       @question_state.topic = Question::COMPLETED_VALUE
       @question_state.question = Question::COMPLETED_VALUE
     end
-    redirect_to action: :index
+    update_channel_and_redirect
   end
 
   def previous_question
-    if @question_state.question > 1 && Question.exist?(@question_state.topic, @question_state.question - 1)
+    if @question_state.topic == Question::COMPLETED_VALUE
+      @question_state.topic = Question.previous_topic_of(@question_state.topic)
+      @question_state.question = Question.last_question_of(@question_state.topic)
+    elsif @question_state.question > 1 && Question.exist?(@question_state.topic, @question_state.question - 1)
       @question_state.question -= 1
     elsif @question_state.topic > 1
       @question_state.topic -= 1
@@ -49,7 +54,7 @@ class QuestionStateController < ApplicationController
       @question_state.topic = 1
       @question_state.question = 1
     end
-    redirect_to action: :index
+    update_channel_and_redirect
   end
 
   private
@@ -61,5 +66,10 @@ class QuestionStateController < ApplicationController
   def set_vars
     @question = Question.new
     @next_topic, @next_question = @question.next_topic_and_question
+  end
+
+  def update_channel_and_redirect
+    ActionCable.server.broadcast("question_details", { topic: @question_state.topic, question: @question_state.question, completed_value: Question::COMPLETED_VALUE })
+    redirect_to action: :index
   end
 end

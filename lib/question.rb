@@ -1,5 +1,5 @@
 class Question < QuestionState
-  COMPLETED_VALUE = 1000
+  COMPLETED_VALUE = 111
   MISSING_QUESTION = '<missing question>'
   MISSING_ANSWER = '<missing answer>'
 
@@ -35,6 +35,12 @@ class Question < QuestionState
   def self.last_question_of(topic)
     99.downto(1).each do |q|
       return q if exist?(topic, q)
+    end
+  end
+
+  def self.previous_topic_of(topic)
+    (topic - 1).downto(1).each do |t|
+      return t if exist?(t, 1)
     end
   end
 

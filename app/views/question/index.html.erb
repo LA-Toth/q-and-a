@@ -1,4 +1,4 @@
-<% if @question.topic != 1000 %>
+<% if @question.topic != Question::COMPLETED_VALUE %>
 <%= render partial: 'index' %>
 <%else %>
   <h1>Completed</h1>

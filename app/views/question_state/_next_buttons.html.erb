@@ -4,7 +4,7 @@
       <div class="col px-3">
         <form action="<%= question_state_next_question_path %>">
           <button type="submit" class="btn btn-primary"
-                  <%- if @question_state.topic == 1000 %> disabled
+                  <%- if @question_state.topic == Question::COMPLETED_VALUE %> disabled
                   <%- end %>>Next question
           </button>
         </form>
@@ -14,7 +14,8 @@
       <div class="col px-3">
         <form action="<%= question_state_previous_question_path %>">
           <button type="submit" class="btn btn-primary"
-                  <%- if @question_state.topic == 1000 || (@question_state.topic == 1 && @question_state.question == 1) %> disabled
+                  <%- if @question_state.topic == Question::COMPLETED_VALUE || (@question_state.topic == 1 && @question_state.question == 1) %>
+                  disabled
                   <%- end %>>Previous question
           </button>
         </form>
@@ -26,7 +27,7 @@
       <div class="col px-3">
         <form action="<%= question_state_next_topic_path %>">
           <button type="submit" class="btn btn-secondary"
-                  <%- if @question_state.topic == 1000 %> disabled
+                  <%- if @question_state.topic == Question::COMPLETED_VALUE  %> disabled
                   <%- end %>>Next topic
           </button>
         </form>
@@ -37,7 +38,7 @@
       <div class="col px-3">
         <form action="<%= question_state_previous_topic_path %>">
           <button type="submit" class="btn btn-secondary"
-                  <%- if @question_state.topic == 1000 || (@question_state.topic == 1 && @question_state.question == 1) %> disabled
+                  <%- if @question_state.topic == 1 %>  disabled
                   <%- end %>>Previous topic
           </button>
         </form>
