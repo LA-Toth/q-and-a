@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+
+  redis:
+    image: 'redis:7.2-alpine'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+
+  website:
+    image: q-and-a
+    depends_on:
+      - 'redis'
+    environment:
+      - REDIS_URL=redis://redis:6379/1
+      - APP_HOST
+      - USE_HTTP_REDIRECT
+    volumes:
+      - /home/q-and-a/topics-questions:/rails/topics-questions
+    ports:
+      - '3000:3000'
+
+volumes:
+  redis:

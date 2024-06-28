@@ -40,6 +40,16 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
+  if ENV.fetch('APP_HOST', nil)
+    config.action_cable.allowed_request_origins = [
+      ENV.fetch('APP_HOST', nil),
+    ].compact.map do |allowed_host|
+      /(?:^(http|https):\/\/)?(?:([^.]+)\.)?#{allowed_host}/
+    end
+  else
+    # Allow all origins
+    config.action_cable.disable_request_forgery_protection = true
+  end
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
@@ -47,6 +57,7 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
+  config.force_ssl = false
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)

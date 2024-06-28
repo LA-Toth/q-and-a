@@ -70,6 +70,10 @@ class QuestionStateController < ApplicationController
 
   def update_channel_and_redirect
     ActionCable.server.broadcast("question_details", { topic: @question_state.topic, question: @question_state.question, completed_value: Question::COMPLETED_VALUE })
-    redirect_to action: :index
+    if ENV.fetch('USE_HTTP_REDIRECT', '0') == '1'
+      redirect_to action: :index, protocol: 'http://'
+    else
+      redirect_to action: :index
+    end
   end
 end
